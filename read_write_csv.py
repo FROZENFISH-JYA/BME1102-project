@@ -1,15 +1,13 @@
 import pandas as pd
 import csv
-#读取csv文件内容
+#读取csv文件内容到dataframe
 def ReadCsv(path):
-    con = pd.read_csv(path)
-    return con
-#追加写入csv
-def addCsv():
-    with open(input('path:'), 'a') as f:
-        writer = csv.writer(f)
-        writer.writerow([input('Cat_Name:'),input('Location:'),input('Date:'),input("Time:")])
-
+    dataframe = pd.read_csv(path)
+    return dataframe
+#从dataframe追加写入csv
+def addCsv(path,dataframe):
+    #向csv追加数据
+    dataframe.to_csv(path,mode='a',header=False,index=None)
 
 
 
