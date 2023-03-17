@@ -1,37 +1,108 @@
 import pandas as pd
-'''
-data.csv格式:第一行为标签
-Name, Place, Month, Date, Hour, Minute
-cat1, sist, 11, 2, 12, 30
-'''
-#参考https://www.cnblogs.com/bonelee/p/9732761.html
+import csv
+import read_write_csv
+#创建三种错误类，在查询不到信息时返回
+class WrongNameError(Exception):
+    def __str__(self):
+        return "There's no such cat appeared"
+class WrongPlaceError(Exception):
+    def __str__(self):
+        return "There's no cat appeared in this pace"
+class WrongTimeError(Exception):
+    def __str__(self):
+        return "There's no cat appeared during this period"
 
-#search by name, name is a str
-#读取dataframe,返回一个只包含Name标签是name的dataframe
-def search_name(dataframe,name):
-    '''
-    dataframe包含了整个csv的数据
-		your job: 1.用df.iterrows()按行读取dataframe
-              2.判断row的Name标签值是不是name
-              3.将这一行添加到新的frame中 可以通过标签名获取对应的值
-              用frame.loc[len(frame.index)] = [value1, value2, value3, ...]向frame新写入一行数据
-							4.返回frame
-    '''
-    frame = pd.DataFrame(columns=['Name', 'Place', 'Month', 'Date', 'Hour', 'Minute']) #initiate the return frame
+#以下是函数
+'''按要求输入参数，会生成一个名为search_result.csv的文件'''
+#按名字查询
+def search_name(path,name):#需要路径和需要查询的猫的名字
+        #创建一个csv文件接受查询结果
+        f= open('search_name_result.csv', 'w')
+        csv_writer=csv.writer(f)
+        csv_writer.writerow(["Name", "Place", "Month","Date","Hour","Minute"])
+        a=0
+        #按行读取查询
+        with open(path, 'r', encoding="utf-8") as csvfile:
+            reader = csv.DictReader(csvfile)
+            for row in reader:
+                if row['name'] == name:
+                    csv_writer.writerow(row.values())
+                    a+=1
+            f.close()
+            #判断是否输入了一个错误的名字
+            try:
+                b=1/a
+            except:
+                raise WrongNameError
 
-    
-    return frame
+#按地点查询
+def search_Place(path, place):##需要路径和需要查询的地点
+    # 创建一个csv文件接受查询结果
+    f = open('search_place_result.csv', 'w')
+    csv_writer = csv.writer(f)
+    csv_writer.writerow(["Name", "Place", "Month", "Date", "Hour", "Minute"])
+    a = 0
+    # 按行读取查询
+    with open(path, 'r', encoding="utf-8") as csvfile:
+        reader = csv.DictReader(csvfile)
+        for row in reader:
+            if row['place'] == place:
+                csv_writer.writerow(row.values())
+                a += 1
+        f.close()
+        # 判断是否输入了一个错误的地点
+        try:
+            b = 1 / a
+        except:
+            raise WrongPlaceError
+#按时间查询
+def search_Hour(path, hour):##需要路径和需要查询的时间点
+    # 创建一个csv文件接受查询结果
+    f = open('search_hour_result.csv', 'w')
+    csv_writer = csv.writer(f)
+    csv_writer.writerow(["Name", "Place", "Month", "Date", "Hour", "Minute"])
+    a = 0
+    # 按行读取查询
+    with open(path, 'r', encoding="utf-8") as csvfile:
+        reader = csv.DictReader(csvfile)
+        for row in reader:
+            if row['hour'] == str(hour):
+                csv_writer.writerow(row.values())
+                a += 1
+        f.close()
+        # 判断是否输入了一个没有猫出现的时间
+        try:
+            b = 1 / a
+        except:
+            raise WrongTimeError
+#按时间段查询
+def search_Period(path, t1,t2):##需要路径和需要查询的时间段
+    # 创建一个csv文件接受查询结果
+    f = open('search_period_result.csv', 'w')
+    csv_writer = csv.writer(f)
+    csv_writer.writerow(["Name", "Place", "Month", "Date", "Hour", "Minute"])
+    a = 0
+    # 按行读取查询
+    with open(path, 'r', encoding="utf-8") as csvfile:
+        reader = csv.DictReader(csvfile)
+        hour=int(t1)
+        for row in reader:
+            while hour<=t2:
+                if row['hour'] == str(hour):
+                    csv_writer.writerow(row.values())
+                    a += 1
+                hour+=1
+            hour = int(t1)
+        f.close()
+        # 判断是否输入了一个没有猫出现的时间
+        try:
+            b = 1 / a
+        except:
+            raise WrongTimeError
 
-#search by Date, Date is a str
-def search_Date(dataframe,date):
-    frame = pd.DataFrame(columns=['Name', 'Place', 'Month', 'Date', 'Hour', 'Minute'])#initiate the return frame
-
-
-    return frame
-
-#search by Place, Place is a str
-def search_Place(dataframe,place):
-    frame = pd.DataFrame(columns=['Name', 'Place', 'Month', 'Date', 'Hour', 'Minute'])#initiate the return frame
-
-
-    return frame
+#测试模块
+if __name__=='__main__':
+    search_name('./CSVtest.csv','cat1')
+    search_Place('./CSVtest.csv', 'area3')
+    search_Hour('./CSVtest.csv', 9)
+    search_Period('./CSVtest.csv', 2,10)
