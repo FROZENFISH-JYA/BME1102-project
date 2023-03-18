@@ -1,51 +1,39 @@
 import pandas as pd
 import functools
-#参考 https://zhuanlan.zhihu.com/p/456535807
+import csv
 
 
-#order the dataset by Date
-'''
-your job:sort dataframe with .sort_values()
-Hint: sort by month and minute
 
-'''
-def order_Date(dataframe,flag):
-		frame = pd.DataFrame(columns=['Name','Place','Month', 'Date', 'Hour', 'Minute']) #initiate the return frame
-		
-		return frame
+#order the dataset by Name
+def order_Time(dataframe,path):
+        dataframe=[]
+        df = pd.read_csv(path) 
+        df_data_order0 = df.sort_values(by=['Name'],ascending=[True])
+        return df
 
-#order the dataset by Time
-'''
-your job:your job:sort dataframe with .sort_values()
-Hint: sort by hour and minute
-
-'''
-def order_Time(dataframe,flag):
-		frame = pd.DataFrame(columns=['Name', 'Place', 'Month', 'Date', 'Hour', 'Minute']) #initiate the return frame
-
-
-		return frame
+#order the dataset by Place
+def order_Time(dataframe,flag,path):
+        
+        frame = pd.DataFrame(dataframe,columns=['Name', 'Place', 'Date', 'Hour', 'Minute']) #initiate the return frame
+        for i in frame['Place']:
+            i=i.lower()
+        df_data_order0 = frame.sort_values(by=['Place'],ascending=[True])
+        return frame
 
 #order the dataset by Date
-'''
-your job:your job:sort dataframe with .sort_values()
-Hint: sort by name(alphabetical order)
+def order_Name(dataframe,flag,path):
+        frame = pd.DataFrame(dataframe,columns=['Name', 'Place', 'Date', 'Hour', 'Minute']) #initiate the return frame
+        df_data_order0 = frame.sort_values(by=['Place'],ascending=[True])
+        return frame
 
-'''
-def order_Place(dataframe,flag):
-		frame = pd.DataFrame(columns=['Name', 'Place', 'Month', 'Date', 'Hour', 'Minute']) #initiate the return frame
+#order the dataset by Hour and Minute
+def order_Place(dataframe,flag,path):
+        frame = pd.DataFrame(dataframe,columns=['Name', 'Place', 'Date', 'Hour', 'Minute']) #initiate the return frame
 
-
-		return frame
+        df_data_order0 = frame.sort_values(by=['Hour','Minute'],ascending=[True,True])
+        return frame
 
 #order the dataset by Date
-'''
-your job:sort dataframe with .sort_values()
-Hint: sort by name(alphabetical order)
-
-'''
-def order_Name(dataframe,flag):
-		frame = pd.DataFrame(columns=['Name', 'Place', 'Month', 'Date', 'Hour', 'Minute']) #initiate the return frame
-
-
-		return frame
+def order_Name(dataframe,flag,path):
+        frame = pd.DataFrame(dataframe,columns=['Name', 'Place', 'Date', 'Hour', 'Minute']) #initiate the return frame
+        return frame
