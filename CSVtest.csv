@@ -1,5 +1,6 @@
 name,place,date,hour,minute
-cat3,area3,2023.1.1,9,1
-cat4,area4,2023.1.1,9,2
-cat1,AREA2,2023.1.2,11,3
-cat1,area1,2023.1.3,4,1
+cat3,area4,2023.1.1,9,01
+cat4,area1,2023.1.1,9,20
+cat1,area2,2023.1.2,11,30
+cat1,area3,2023.1.3,4,30
+cat2,area1,2023.1.3,4,20

@@ -1,6 +1,7 @@
 import pandas as pd
 import csv
 import read_write_csv
+import ordering as o
 #创建三种错误类，在查询不到信息时返回
 class WrongNameError(Exception):
     def __str__(self):
@@ -86,8 +87,8 @@ def search_Period(path, h1, m1, h2, m2 ):##需要路径和需要查询的时间�
 
 #测试模块
 if __name__=='__main__':
-    a=search_name('./CSVtest.csv','cat1')
-    b=search_Place('./CSVtest.csv', 'area3')
-    c=search_Period('./CSVtest.csv', 2,59,9,1)
+
+    df=search_Period('./CSVtest.csv', 2,10,9,50)
+    print(df)
 
 
