@@ -3,7 +3,7 @@ import matplotlib.cm
 sns.set(font_scale=1.5)
 
 import matplotlib.image as mpimg 
-map_img = mpimg.imread('map.jpg') 
+map_img = mpimg.imread('map_shanghaitech.jpg') 
 
 # making and plotting heatmap 
 import numpy.random as random 

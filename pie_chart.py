@@ -15,7 +15,7 @@ plt.rcParams['font.sans-serif']=['Microsoft JhengHei']
 '''
 def pie_chart(date1,date2):
     # 读取原始数据
-    df = rw.ReadCsv("./CSVtest.csv")
+    df = rw.ReadCsv()
     # 截取date1和date2间的记录
     df = s.search_Date(df,date1,date2)
     # 对每只猫做名称检索，统计其出现次数
@@ -37,4 +37,3 @@ def pie_chart(date1,date2):
     plt.legend(loc='upper right')
     plt.show()
     return
-pie_chart("2023.1.1", "2023.1.2")
