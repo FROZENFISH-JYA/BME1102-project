@@ -22,11 +22,7 @@ def search_Name(dataframe,name):#需要路径和需要查询的猫的名字
         if row['name'] == name:
             df.loc[len(df)] = row
             a+=1
-    #判断是否输入了一个错误的名字
-    try:
-        b=1/a
-    except:
-        raise WrongNameError
+
     return df
 
 
@@ -82,8 +78,6 @@ def search_Date(dataframe, d1, d2):##需要路径和需要查询的时间段, d1
     date2 = int(d2[2])
     # 按行读取查询
     for index,row in dataframe.iterrows():
-        if index == 0:
-            continue
         #分割日期，准备比较
         d = row['date'].split(".")
         year = int(d[0])
