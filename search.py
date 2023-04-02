@@ -43,11 +43,7 @@ def search_Place(dataframe, place):
         if row['place'] == place:
             df.loc[len(df)] = row
             a += 1
-    # 判断是否输入了一个错误的地点
-    try:
-        b = 1 / a
-    except:
-        raise WrongPlaceError
+
     return df
 
 """
@@ -70,11 +66,7 @@ def search_Period(dataframe, h1, m1, h2, m2 ):
                 continue
             df.loc[len(df)] = row
             a += 1
-    # 判断是否输入了一个没有猫出现的时间
-    try:
-        b = 1 / a
-    except:
-        raise WrongTimeError
+            
     return df
 
 """
@@ -128,11 +120,7 @@ def search_Date(dataframe, d1, d2):
         #将此行数据写入dataframe
         df.loc[len(df)] = row
         a += 1
-    # 判断是否输入了一个没有猫出现的时间
-    try:
-        b = 1 / a
-    except:
-        raise WrongTimeError
+        
     return df
 
 
