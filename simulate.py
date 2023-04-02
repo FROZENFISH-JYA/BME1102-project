@@ -96,7 +96,7 @@ cat7 = cat('cat7', 1, 20)
 cat8 = cat('cat8', 7, 10)
 cat9 = cat('cat9', 6, 60)
 cat10 = cat('cat10', 2, 20)
-world_clock = clock('2023.1.1','2023.1.20')
+world_clock = clock('2023.1.1','2023.12.31')
 
 while world_clock.check() == True:
 		cat1.simulate(world_clock)
