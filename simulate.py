@@ -69,8 +69,6 @@ class clock:
 		# 模拟时间流动,默认一个时钟tick是十分钟
 		def clock_tick(self):
 				self.time += dt.timedelta(minutes = 10)
-		pass
-
 
 # 区域之间相邻关系
 adjacent_list = [[2,3,4,5,6],
