@@ -4,9 +4,9 @@ import read_write_csv as r
 import numpy as np
 import calendar
 
-print(s.search_Date(r.ReadCsv('.\CSVtest.csv'),'2023.1.1','2023.1.2'))
 #查询某一天某只猫的作息时间，返回每个小时所查猫的出现次数
-def data_generate1(date,name,df):
+def data_generate1(date,name):
+    df=r.ReadCsv()
     t_list=list(np.zeros(24,dtype='int'))#创建一个0—24小时的全零列表
     da_se=s.search_Date(df,date,date)#先按日期过滤
     na_se=s.search_Name(da_se,name)#再按名称过滤
@@ -18,7 +18,8 @@ def data_generate1(date,name,df):
     return t_list
 
 #查询某只猫在某个月内的出没情况，返回每天出现次数
-def data_generate2(month,name,df):#month的输入格式为“年.月“，如”2023.1“
+def data_generate2(month,name):#month的输入格式为“年.月“，如”2023.1“
+    df = r.ReadCsv()
     k=month.split('.')#分割年月
     year=int(k[0])
     month_=int(k[1])
@@ -38,7 +39,8 @@ def data_generate2(month,name,df):#month的输入格式为“年.月“，如”
     return t_list
 
 #查询某只猫在某年内的出没情况，返回每天出现次数
-def data_generate3(year,name,df):#month的输入格式为“年“，如”2023“
+def data_generate3(year,name):#month的输入格式为“年“，如”2023“
+    df = r.ReadCsv()
     t_list = list(np.zeros(12, dtype='int'))#创建一个长度为12的全零列表
     da_se=s.search_Date(df,year+'.1.1',year+'.12.31')#先按日期过滤
     na_se=s.search_Name(da_se,name)#再按名称过滤
@@ -56,7 +58,8 @@ def data_generate3(year,name,df):#month的输入格式为“年“，如”2023�
 
 
 #查询某天某个地点猫的出没情况，返回每个小时的所查地猫的出现次数
-def data_generate4(date,area,df):
+def data_generate4(date,area):
+    df = r.ReadCsv()
     t_list=list(np.zeros(24,dtype='int'))#创建一个0—24小时的全零列表
     da_se=s.search_Date(df,date,date)#先按日期过滤
     na_se=s.search_Place(df,area)#再按地点过滤
