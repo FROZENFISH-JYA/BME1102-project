@@ -24,20 +24,31 @@ def data_gen2(date1, date2, name):
 				date1=date1+dt.timedelta(days = 1)
 		distribution_mean = distribution_sum / days
 		return distribution_mean 
-
-def plot_distribution(X,Y0,Y1):#Y0为平均值，Y为所查值
+#获取某日期前多少天的日期
+def date_before(date,days):#date为起始日期，days为多少天前
+	date_list = date.split('.')
+	year = int(date_list[0])
+	month = int(date_list[1])
+	day = int(date_list[2])
+	date_days_ago = dt.datetime(year, month, day) - dt.timedelta(days=days)
+	date_days_ago = date_days_ago.strftime('%Y.%m.%d')
+	return date_days_ago
+def plot_distribution(date,name):#Y0为平均值，Y为所查值
+		X = list(range(1, 25))#一天24小时
+		#获取前30天的起始和终止日期
+		start_date=date_before(date,30)
+		end_date=date_before(date,1)
+		Y0 = data_gen2(start_date, end_date, name)#一段时间内的平均情况
+		Y1 = dg.data_generate1(date, name)#所查日期情况
 		fig = plt.figure(figsize=(20,8),dpi=80)
-		a,=plt.plot(X, Y0)
-		b,=plt.plot(X,Y1)
-		plt.legend(handles=[a, b], labels=["average", "date you search"], loc='best')
+		a,=plt.plot(X, Y0)#画平均情况
+		b,=plt.plot(X,Y1)#画所查情况
+		plt.legend(handles=[a, b], labels=["average", "date you search"], loc='best')#画图例
 		plt.ylim((0,10))
 		plt.xlabel('hour')
 		plt.ylabel('num')
-		plt.title('mean distribution during ' + '2023.1.1' + ' and ' + '2023.1.3')
+		plt.title(f'mean distribution during " {start_date} and  {end_date}')
 		plt.show()
 if __name__=='__main__':
-	X = list(range(1,25))
-	Y0= data_gen2('2023.1.1','2023.1.3','cat1')
-	Y1=dg.data_generate1('2023.1.2','cat1')
-	plot_distribution(X,Y0,Y1)
-	plt.legend()
+
+	plot_distribution('2023.2.2','cat1')
