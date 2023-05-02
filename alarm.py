@@ -35,7 +35,7 @@ def date_before_30days(given_date):
 
 df_all=rw.ReadCsv()#读取总数据
 date_now=current_date()#获取当天日期
-''''''
+'''以下预警的时间均出于准确性和及时性的均衡考量'''
 #对一只猫的失踪预警：（3天不出现）
 def cat_miss(name):
     date_now = current_date()  # 获取当天日期
@@ -85,11 +85,10 @@ def area_danger(area):
     for i in five_dates:
         n=sum(dg.data_generate4(i,area))
         five_days_list.append(n)
-    mean_recent=sum(five_days_list)/5#获取3天内猫活动次数的平均值
+    mean_recent=sum(five_days_list)/5#获取5天内该区域猫活动次数的平均值作为近期指标
     date_30days_ago = date_before_30days(date_now)
-    last_month = dg.data_generate5(date_30days_ago[:7], area)
+    last_month = dg.data_generate5(date_30days_ago[:7], area)#获取上个月该区域猫活动次数的平均值作为正常指标
     mean_normal=sum(last_month)/len(last_month)
-    print(five_days_list)
-    #if (mean_normal-mean_recent)/mean_normal>0.3:#如果该地点猫活动次数减少30%以上认定为区域危险
-       # return 'area warning'
-area_danger('area1')
+    if (mean_normal-mean_recent)/mean_normal>0.3:#如果该地点猫活动次数减少30%以上认定为区域危险
+       return 'area warning'
+
