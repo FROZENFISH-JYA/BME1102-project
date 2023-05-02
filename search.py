@@ -43,8 +43,8 @@ def search_date(dataframe,date):
         if row['date'] == date:
             df.loc[len(df)] = row
             a+=1
-
     return df
+
 """
 按地点查询
 功能: 读取dataframe, 查询地点等于place的记录, 返回一个只包含符合条件的记录的dataframe
