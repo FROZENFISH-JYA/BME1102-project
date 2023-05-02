@@ -56,14 +56,12 @@ def data_generate3(year,name):#month的输入格式为“年“，如”2023“
         t_list[month-1]=n
     return t_list
 
-
 #查询某天某个地点猫的出没情况，返回每个小时的所查地猫的出现次数
 def data_generate4(date,area):
     df = r.ReadCsv()
     t_list=list(np.zeros(24,dtype='int'))#创建一个0—24小时的全零列表
-    da_se=s.search_Date(df,date,date)#先按日期过滤
-    na_se=s.search_Place(df,area)#再按地点过滤
-    print(na_se)
+    da_se=s.search_date(df,date)#先按日期过滤
+    na_se=s.search_Place(da_se,area)#再按地点过滤
     hour_list=list(na_se['hour'])
     for i in hour_list:#依次记录每个小时的出现次数
         n=hour_list.count(i)
