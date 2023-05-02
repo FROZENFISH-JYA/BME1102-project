@@ -4,6 +4,10 @@ import matplotlib.image as mpimg
 import numpy as np
 import search as s
 import read_write_csv as rw
+import matplotlib.pyplot as plt
+import matplotlib.pyplot as plt
+from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
+from PyQt5.QtWidgets import QSizePolicy
 
 def Normalize(data):
     m = np.mean(data)
@@ -58,10 +62,26 @@ def heat_map(matrix):
 							aspect = hmax.get_aspect(),
 							extent = hmax.get_xlim() + hmax.get_ylim(),
 							zorder = 1) # 将背景叠放在热力图下方
+		plt.show()
 
-		from matplotlib.pyplot import show 
-		show()
+def heat_map_for_ui(matrix, fig, ax):
+		map_img = mpimg.imread('map_shanghaitech.jpg') 
+		heatmap_data = matrix
+		sns.set_context({"figure.figsize":(30,30)})
+		
+		hmax = sns.heatmap(heatmap_data,
+								alpha = 0.5, # 透明度
+								annot = False,
+								zorder = 2,
+								cmap="OrRd",
+								ax=ax
+								)
 
+		hmax.imshow(map_img,
+							aspect = hmax.get_aspect(),
+							extent = hmax.get_xlim() + hmax.get_ylim(),
+							zorder = 1) # 将背景叠放在热力图下方
+		
 
 # matrix = get_matrix('2023.1.1','2023.1.2')
 # heat_map(matrix)

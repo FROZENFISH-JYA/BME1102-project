@@ -32,8 +32,32 @@ def pie_chart(date1,date2):
             startangle = 90,
             colors = colors)
     title = f"{date1}至{date2}的活跃度统计"
-    plt.title(title)
+    plt.set_title(title)
     plt.axis('equal')
     plt.legend(loc='upper right')
     plt.show()
+    return
+
+
+def pie_chart_for_ui(date, fig, ax):
+    # 读取原始数据
+    df = rw.ReadCsv()
+    # 截取date1和date2间的记录
+    df = s.search_Date(df,date,date)
+    # 对每只猫做名称检索，统计其出现次数
+    list = []
+    for a in range(1,11):
+      name = 'cat' + str(a)
+      df1 = s.search_Name(df,name)
+      list.append(df1.shape[0])
+      colors = ["#55efc4", "#81ecec", "#74b9ff", "#a29bfe", "#dfe6e9", "#ffeaa7", "#fab1a0", "#fd79a8", "#e17055", "#fdcb6e"]
+    ax.pie(x = list, 
+            labels = ['cat1','cat2','cat3','cat4','cat5','cat6','cat7','cat8','cat9','cat10'], 
+            shadow = False, 
+            autopct = '%1.1f%%', 
+            startangle = 90,
+            colors = colors)
+    ax.set_title(f"当日的活跃度统计")
+    ax.axis('equal')
+    ax.legend(loc='upper right')
     return
