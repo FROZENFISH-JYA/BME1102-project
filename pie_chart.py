@@ -39,12 +39,7 @@ def school_pie_chart(date1,date2):
     plt.show()
     return
 
-def area_pie_chart(date1,date2,area):
-    # 读取原始数据
-    df = rw.ReadCsv()
-    # 截取date1和date2间的记录
-    df = s.search_Date(df,date1,date2)
-    df=s.search_Place(df,area)
+def area_pie_chart(df, fig, ax):
     # 对每只猫做名称检索，统计其出现次数
     list = []
     for a in range(1,11):
@@ -52,17 +47,34 @@ def area_pie_chart(date1,date2,area):
       df1 = s.search_Name(df,name)
       list.append(df1.shape[0])
       colors = ["#55efc4", "#81ecec", "#74b9ff", "#a29bfe", "#dfe6e9", "#ffeaa7", "#fab1a0", "#fd79a8", "#e17055", "#fdcb6e"]
-    plt.pie(x = list,
+    ax.pie(x = list,
             labels = ['cat1','cat2','cat3','cat4','cat5','cat6','cat7','cat8','cat9','cat10'],
             shadow = False,
             autopct = '%1.1f%%',
             startangle = 90,
             colors = colors)
-    title = f"{date1}至{date2}的活跃度统计"
-    plt.title(title)
-    plt.axis('equal')
-    plt.legend(loc='upper right')
-    plt.show()
+    title = f"活跃度统计"
+    ax.set_title(title)
+    ax.axis('equal')
+    ax.legend(loc='upper right')
+    return
+
+
+def area_bar_chart(df, fig, ax):
+    # 对每只猫做名称检索，统计其出现次数
+    list = []
+    for a in range(1,11):
+      name = 'cat' + str(a)
+      df1 = s.search_Name(df,name)
+      list.append(df1.shape[0])
+      colors = ["#55efc4", "#81ecec", "#74b9ff", "#a29bfe", "#dfe6e9", "#ffeaa7", "#fab1a0", "#fd79a8", "#e17055", "#fdcb6e"]
+    ax.bar(x = ['cat1','cat2','cat3','cat4','cat5','cat6','cat7','cat8','cat9','cat10'],
+           height = list,
+           color = colors)
+    title = f"活跃度统计"
+    ax.set_title(title)
+    ax.set_ylabel('出现次数')
+    ax.set_xlabel('猫的编号')
     return
 
 # 设置中文字体
