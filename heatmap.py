@@ -81,7 +81,51 @@ def heat_map_for_ui(matrix, fig, ax):
 							aspect = hmax.get_aspect(),
 							extent = hmax.get_xlim() + hmax.get_ylim(),
 							zorder = 1) # 将背景叠放在热力图下方
+
+
+
+"""
+从给定dataframe中统计每个区域的热度
+绘制出热力图
+"""
+def heatmap_cat(df, fig, ax):
+		matrix = np.zeros((30,30))
+		masks = []
+		# 载入每个区域的mask
+		masks.append(np.genfromtxt("./masks/mask1.csv", delimiter=','))
+		masks.append(np.genfromtxt("./masks/mask2.csv", delimiter=','))
+		masks.append(np.genfromtxt("./masks/mask3.csv", delimiter=','))
+		masks.append(np.genfromtxt("./masks/mask4.csv", delimiter=','))
+		masks.append(np.genfromtxt("./masks/mask5.csv", delimiter=','))
+		masks.append(np.genfromtxt("./masks/mask6.csv", delimiter=','))
+		masks.append(np.genfromtxt("./masks/mask7.csv", delimiter=','))
+
+		list = []
+		for a in range(1,8):
+			place = 'area' + str(a)
+			df1 = s.search_Place(df, place)
+			matrix += df1.shape[0] * masks[a-1]
+		# 做归一化处理并返回
+		ret = (matrix-np.min(matrix))/(np.max(matrix)-np.min(matrix))
+
+		map_img = mpimg.imread('map_shanghaitech.jpg') 
+		heatmap_data = ret
+		sns.set_context({"figure.figsize":(30,30)})
 		
+		hmax = sns.heatmap(heatmap_data,
+								alpha = 0.5, # 透明度
+								annot = False,
+								zorder = 2,
+								cmap="OrRd",
+								ax=ax
+								)
+
+		hmax.imshow(map_img,
+							aspect = hmax.get_aspect(),
+							extent = hmax.get_xlim() + hmax.get_ylim(),
+							zorder = 1) # 将背景叠放在热力图下方
+
+
 
 # matrix = get_matrix('2023.1.1','2023.1.2')
 # heat_map(matrix)
