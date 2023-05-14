@@ -1,0 +1,11 @@
+name  miss  ill  deathname  miss  ill  death
+ cat1  None  normal situation  normal situation
+ cat2  None  normal situation  normal situation
+ cat3  None  normal situation  normal situation
+ cat4  None  normal situation  normal situation
+ cat5  None  normal situation  normal situation
+ cat6  None  normal situation  normal situation
+ cat7  None  normal situation  normal situation
+ cat8  None  normal situation  normal situation
+ cat9  None  normal situation  normal situation
+ cat10  None  normal situation  normal situation
