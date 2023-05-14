@@ -17,10 +17,12 @@ class MyMainWindow(QMainWindow):
 				super().__init__()
 				# 加载UI文件
 				loadUi("a.ui", self)
+
 				# 获取QPushButton对象
-				self.push_button = self.findChild(QPushButton, "push")
+				self.push_button1 = self.findChild(QPushButton, "push1")
 				# 连接信号和槽函数
-				self.push_button.clicked.connect(self.on_push_button_clicked)
+				self.push_button1.clicked.connect(self.on_push_button1_clicked)
+
 				scrollArea = self.findChild(QScrollArea, 'scrollArea')
 				self.scroll_area = scrollArea
 				
@@ -94,17 +96,20 @@ class MyMainWindow(QMainWindow):
 				self.timer.timeout.connect(self.update_time_label)
 				self.timer.start(1000)
 
-		def on_push_button_clicked(self):
-				# 在这里编写按钮点击后的行为
-				print("按钮被点击了！")
-				# 刷新图像
-				self.refresh_image()
+				self.push_button2 = self.findChild(QPushButton, "push2")
+				self.push_button2.clicked.connect(self.on_push_button2_clicked)
 
-				# 刷新QScrollArea
-				self.scroll_area.viewport().update()
-				
-				# 刷新QGraphicsView
-				self.graphics_view.viewport().update()
+				self.push_button3 = self.findChild(QPushButton, "push3")
+				self.push_button3.clicked.connect(self.on_push_button3_clicked)
+
+		def on_push_button1_clicked(self):
+				print("1")
+		
+		def on_push_button2_clicked(self):
+				print("2")
+		
+		def on_push_button3_clicked(self):
+				print("3")
 		
 		def update_time_label(self):
 			# 获取当前时间并设置为时间标签的文本

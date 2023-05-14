@@ -20,7 +20,7 @@
    <string>UI界面</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QPushButton" name="push">
+   <widget class="QPushButton" name="push1">
     <property name="geometry">
      <rect>
       <x>620</x>
@@ -30,7 +30,7 @@
      </rect>
     </property>
     <property name="text">
-     <string>push</string>
+     <string>刷新</string>
     </property>
    </widget>
    <widget class="QScrollArea" name="scrollArea">
@@ -120,7 +120,7 @@
      </property>
     </widget>
    </widget>
-   <widget class="QPushButton" name="push_2">
+   <widget class="QPushButton" name="push2">
     <property name="geometry">
      <rect>
       <x>620</x>
@@ -130,10 +130,10 @@
      </rect>
     </property>
     <property name="text">
-     <string>push</string>
+     <string>按猫查询</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="push_3">
+   <widget class="QPushButton" name="push3">
     <property name="geometry">
      <rect>
       <x>620</x>
@@ -143,7 +143,49 @@
      </rect>
     </property>
     <property name="text">
-     <string>push</string>
+     <string>按地点查询</string>
+    </property>
+   </widget>
+   <widget class="QScrollArea" name="scrollArea_2">
+    <property name="geometry">
+     <rect>
+      <x>880</x>
+      <y>620</y>
+      <width>341</width>
+      <height>221</height>
+     </rect>
+    </property>
+    <property name="widgetResizable">
+     <bool>true</bool>
+    </property>
+    <widget class="QWidget" name="scrollAreaWidgetContents_2">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>0</y>
+       <width>339</width>
+       <height>219</height>
+      </rect>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QLabel" name="label_2">
+    <property name="geometry">
+     <rect>
+      <x>1030</x>
+      <y>580</y>
+      <width>51</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>微软雅黑</family>
+      <pointsize>14</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>警报</string>
     </property>
    </widget>
   </widget>
