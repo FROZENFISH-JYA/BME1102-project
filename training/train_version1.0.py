@@ -27,7 +27,8 @@ class CNNCifar(nn.Module):
         return output
         
 net = CNNCifar()
-print(net)
+for param_tensor in net.state_dict():
+    print(param_tensor, "\t", net.state_dict()[param_tensor].size())
 
 #加载数据集
 apply_transform = transforms.Compose([
@@ -96,6 +97,7 @@ def train(train_accuracy, train_loss):
 def save():
 	torch.save(net.state_dict(),'CNN_Origi.pth')
 	torch.save(net,'CNN_all.pth')
+
  
 
 train_accuracy = []
@@ -106,7 +108,12 @@ for epoch in range(20):
 	print('epoch: %d'%epoch)
 	train(train_accuracy, train_loss)
 	test(test_accuracy, test_loss)
-	save()
+	#save()
+	state = {
+    'model': net.state_dict(),
+    'optimizer': optimizer.state_dict()
+	}
+	torch.save(state, 'CNN_Origi.pth')
 
 fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(10, 5))
 ax1.plot(train_accuracy)
