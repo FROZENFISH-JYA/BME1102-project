@@ -1,11 +1,11 @@
-name  miss  ill  deathname  miss  ill  death
- cat1  None  normal situation  normal situation
- cat2  None  normal situation  normal situation
- cat3  None  normal situation  normal situation
- cat4  None  normal situation  normal situation
- cat5  None  normal situation  normal situation
- cat6  None  normal situation  normal situation
- cat7  None  normal situation  normal situation
- cat8  None  normal situation  normal situation
- cat9  None  normal situation  normal situation
- cat10  None  normal situation  normal situation
+name   miss    ill    death
+ cat1  normal_situation  normal_situation  normal_situation
+ cat2  normal_situation  normal_situation  normal_situation
+ cat3  normal_situation  normal_situation  normal_situation
+ cat4  normal_situation  normal_situation  normal_situation
+ cat5  normal_situation  normal_situation  normal_situation
+ cat6  normal_situation  normal_situation  normal_situation
+ cat7  normal_situation  normal_situation  normal_situation
+ cat8  normal_situation  normal_situation  normal_situation
+ cat9  normal_situation  normal_situation  normal_situation
+ cat10  normal_situation  normal_situation  normal_situation
