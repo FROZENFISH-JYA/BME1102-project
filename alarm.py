@@ -2,6 +2,7 @@ import read_write_csv as rw
 import search as se
 import datetime
 import data_generate as dg
+import cats_inf
 '''先定义一些基础的对日期变换的函数为后面服务'''
 #定义函数来获取当日日期
 def current_date():
@@ -47,6 +48,8 @@ def cat_miss(name):
         three_days_list.append(n)
     if sum(three_days_list)==0:
         return 'missing warning'
+    else:
+        return 'normal situation'
 
 #对一只猫的死亡预警：（5天不出现）
 def cat_death(name):
@@ -59,6 +62,8 @@ def cat_death(name):
         three_days_list.append(n)
     if sum(three_days_list)==0:
         return 'death warning'
+    else:
+        return 'normal situation'
 
 #生病预警(出现次数衰减30%以上）
 def cat_ill(name):
@@ -75,6 +80,8 @@ def cat_ill(name):
     mean_normal=sum(last_month)/len(last_month)
     if (mean_normal-mean_recent)/mean_normal>0.3:#如果活动次数减少30%以上认定为生病预警
         return 'ill warning'
+    else:
+        return 'normal situation'
 
 #对小区域而言的危险预警
 def area_danger(area):
@@ -91,4 +98,16 @@ def area_danger(area):
     mean_normal=sum(last_month)/len(last_month)
     if (mean_normal-mean_recent)/mean_normal>0.3:#如果该地点猫活动次数减少30%以上认定为区域危险
        return 'area warning'
+    else:
+        return 'normal situation'
 
+#定义一个函数对所有数据检测：
+def test_all():
+    Note = open('alarm_report.txt', mode='a')
+    Note.write('name  miss  ill  death')
+    for i in ['cat1','cat2','cat3','cat4','cat5','cat6','cat7','cat8','cat9','cat10']:
+        Note.write(f'\n {i}  {cat_miss(i)}  {cat_ill(i)}  {cat_death(i)}')
+    Note.close()
+
+if __name__=='__main__':
+	test_all()
