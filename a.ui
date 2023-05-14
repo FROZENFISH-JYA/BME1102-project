@@ -36,7 +36,7 @@
    <widget class="QScrollArea" name="scrollArea">
     <property name="geometry">
      <rect>
-      <x>880</x>
+      <x>870</x>
       <y>50</y>
       <width>341</width>
       <height>521</height>
@@ -146,7 +146,7 @@
      <string>按地点查询</string>
     </property>
    </widget>
-   <widget class="QScrollArea" name="scrollArea_2">
+   <widget class="QScrollArea" name="scrollArea2">
     <property name="geometry">
      <rect>
       <x>880</x>
@@ -158,7 +158,7 @@
     <property name="widgetResizable">
      <bool>true</bool>
     </property>
-    <widget class="QWidget" name="scrollAreaWidgetContents_2">
+    <widget class="QWidget" name="scrollAreaWidgetContents2">
      <property name="geometry">
       <rect>
        <x>0</x>
@@ -195,7 +195,7 @@
      <x>0</x>
      <y>0</y>
      <width>1280</width>
-     <height>26</height>
+     <height>23</height>
     </rect>
    </property>
   </widget>
