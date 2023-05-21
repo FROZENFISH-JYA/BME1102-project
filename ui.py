@@ -19,77 +19,79 @@ class MyMainWindow(QMainWindow):
 				# 加载UI文件
 				loadUi("a.ui", self)
 
-				# 获取QPushButton对象
+				# 找到第一个按钮
 				self.push_button1 = self.findChild(QPushButton, "push1")
-				# 连接信号和槽函数
+				# 关联函数
 				self.push_button1.clicked.connect(self.on_push_button1_clicked)
 
+				# 找到滚动区域1
 				scrollArea = self.findChild(QScrollArea, 'scrollArea')
 				self.scroll_area = scrollArea
 
+				# 找到滚动区域2
 				scrollArea2 = self.findChild(QScrollArea, 'scrollArea2')
 				self.scroll_area2 = scrollArea2
 				scrollAreaWidgetContents2 = self.findChild(QWidget, 'scrollAreaWidgetContents2')
 
-				
+				# 从csv读取所有数据
 				data = io.ReadCsv()
 				self.update_time_label()
 				time = self.time_label.text()
 				date = time.split(" ")[0]
 				searched_data = search.search_date(dataframe = data, date = date)
 						
-				# 找到带滚动条的区域并设置其背景颜色为白色
+				# 找到滚动条区域放置内容
 				scrollAreaWidgetContents = self.findChild(QWidget, 'scrollAreaWidgetContents')
 				self.scrollAreaWidgetContents = scrollAreaWidgetContents
 				scrollAreaWidgetContents.setStyleSheet("background-color: white;")
 						
-				# 创建 QVBoxLayout 用于放置 QLabel
+				# 创建用于放置刚才找到的滚动条区域的layout
 				layout = QVBoxLayout(scrollAreaWidgetContents)
 				self.layout = layout
 				
 
-				# 在第一行添加列名
+				# 在所有数据之前先添加列名
 				label = QLabel(', '.join(searched_data.columns.tolist()))
 				layout.addWidget(label)
 
-				# 添加分割线
+				# 列名后添加分割线
 				line = QFrame()
 				line.setFrameShape(QFrame.HLine)
 				line.setFrameShadow(QFrame.Sunken)
 				layout.addWidget(line)
 
 				for index, row in searched_data.iterrows():
-						# 创建一个 QLabel 来展示 DataFrame 中的一行数据
+						# 每行都创建一个qlabel，依次放置name、place等数据
 						label = QLabel(', '.join([row['name'], row['place'], row['date'], str(row['hour']), str(row['minute'])]))
 								
-						# 添加分割线
+						# 每行都添加分割线
 						line = QFrame()
 						line.setFrameShape(QFrame.HLine)
 						line.setFrameShadow(QFrame.Sunken)
 
-						# 将 QLabel 添加到 QVBoxLayout 中
+						# 将刚才创建的qlabel添加到layout显示
 						layout.addWidget(label)
 						layout.addWidget(line)
 
-				# 将 QVBoxLayout 设置为带滚动条的区域的布局
+				# 为刚才的layout设置滚动条
 				scrollAreaWidgetContents.setLayout(layout)
 
 
-				# 创建 QVBoxLayout 用于放置 QLabel
+				# 创建第二个带滚动条的区域layout
 				layout2 = QVBoxLayout(scrollAreaWidgetContents2)
 				self.layout2 = layout2
 				# 逐行添加内容
 				with open('alarm_report.txt', 'r') as f:
 						for line in f:
 								label = QLabel(line.strip(), scrollAreaWidgetContents2)
-								# 添加分割线
+								#  每行添加分割线
 								line = QFrame()
 								line.setFrameShape(QFrame.HLine)
 								line.setFrameShadow(QFrame.Sunken)
-								# 将 QLabel 添加到 QVBoxLayout 中
+								# 这一行添加到layout显示
 								layout2.addWidget(label)
 								layout2.addWidget(line)
-				# 将 QVBoxLayout 设置为带滚动条的区域的布局
+				# 为layout设置滚动条
 				scrollAreaWidgetContents2.setLayout(layout2)
 								
 								
@@ -97,11 +99,12 @@ class MyMainWindow(QMainWindow):
 				# 在 QGraphicsView 中展示 matplotlib 绘制的图形
 				matrix = heatmap.get_matrix(date,date)
 				fig, (ax1, ax2) = plt.subplots(2,1) 	
-				fig.set_size_inches(7.5, 12) # 设置图像尺寸
+				fig.set_size_inches(7.5, 12)
 				heatmap.heat_map_for_ui(matrix, fig, ax1)
 				pie_chart.pie_chart_for_ui(date, fig, ax2)
 				
-				canvas = FigureCanvas(fig) # 将subplot转换成FigureCanvas
+				# 使用canvas在一块区域展示两张图像
+				canvas = FigureCanvas(fig)
 				canvas.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
 				canvas.updateGeometry()
 				scene = QGraphicsScene()
@@ -145,9 +148,8 @@ class MyMainWindow(QMainWindow):
 			# 获取当前时间并设置为时间标签的文本
 			current_time = QDateTime.currentDateTime().toString("yyyy.MM.dd hh:mm:ss")
 			self.time_label.setText(current_time)
-		
-		
 
+# 子窗口的行为
 class NewWindow1(QWidget):
 		def __init__(self):
 				super().__init__()
@@ -163,7 +165,6 @@ class NewWindow1(QWidget):
 				self.push_button4.clicked.connect(self.on_push_button4_clicked)
 
 				self.scroll_area2 = self.findChild(QScrollArea, 'scrollArea3')
-				# 找到带滚动条的区域并设置其背景颜色为白色
 				
 				self.graphics_view2 = self.findChild(QGraphicsView, 'graphicsView2')
 				self.graphics_view3 = self.findChild(QGraphicsView, 'graphicsView3')
@@ -245,7 +246,8 @@ class NewWindow1(QWidget):
 
 
 				return
-				
+
+# 第二个子窗口的行为				
 class NewWindow2(QWidget):
 		def __init__(self):
 				super().__init__()
@@ -335,9 +337,6 @@ class NewWindow2(QWidget):
 
 
 				return
-
-		
-		
 
 if __name__ == '__main__':
 		app = QApplication(sys.argv)

@@ -108,12 +108,7 @@ for epoch in range(20):
 	print('epoch: %d'%epoch)
 	train(train_accuracy, train_loss)
 	test(test_accuracy, test_loss)
-	#save()
-	state = {
-    'model': net.state_dict(),
-    'optimizer': optimizer.state_dict()
-	}
-	torch.save(state, 'CNN_Origi.pth')
+	save()
 
 fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(10, 5))
 ax1.plot(train_accuracy)
