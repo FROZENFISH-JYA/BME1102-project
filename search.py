@@ -1,5 +1,5 @@
 import pandas as pd
-
+import read_write_csv as rw
 # 本文件为查找模块
 
 # 创建三种错误类，在查询不到信息时返回
@@ -29,6 +29,21 @@ def search_Name(dataframe,name):
             a+=1
 
     return df
+"""
+按日期查询
+功能: 读取dataframe, 查询名称等于name的记录, 返回一个只包含符合条件的记录的dataframe
+输入参数: dataframe, 名称
+"""
+def search_date(dataframe,date):
+    #创建一个dataframe接受查询结果
+    df = pd.DataFrame(columns=['name', 'place', 'date', 'hour', 'minute'])
+    a = 0
+    #按行读取查询
+    for index,row in dataframe.iterrows():
+        if row['date'] == date:
+            df.loc[len(df)] = row
+            a+=1
+    return df
 
 """
 按地点查询
@@ -45,7 +60,24 @@ def search_Place(dataframe, place):
             a += 1
 
     return df
-
+"""查询某个特定日期猫出现的次数"""
+def search_1_date(date):
+    df = rw.ReadCsv()
+    # 按行读取查询
+    n=0
+    for index, row in df.iterrows():
+        if row['date']==date:
+            n+=1
+    return n
+"""查询某个特定地点猫出现的次数"""
+def search_1_area(area):
+    df = rw.ReadCsv()
+    # 按行读取查询
+    n=0
+    for index, row in df.iterrows():
+        if row['place']==area:
+            n+=1
+    return n
 """
 按时间查询
 功能: 读取dataframe, 查询时间处于指定时间段中的记录, 返回一个只包含符合条件的记录的dataframe
@@ -66,7 +98,7 @@ def search_Period(dataframe, h1, m1, h2, m2 ):
                 continue
             df.loc[len(df)] = row
             a += 1
-            
+
     return df
 
 """
@@ -120,7 +152,6 @@ def search_Date(dataframe, d1, d2):
         #将此行数据写入dataframe
         df.loc[len(df)] = row
         a += 1
-        
     return df
 
 
